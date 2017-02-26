@@ -2,15 +2,15 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--8-col">
       <div class="picture">
-        <img :src="this.pictures[$route.params.id].url" />
+          <img :src="this.cat.url" />
       </div>
       <div class="info">
-        <span>{{ this.pictures[$route.params.id].info }}</span>
+        <span>{{ this.cat.info }}</span>
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
       <div class="comment">
-        <span>{{ this.pictures[$route.params.id].comment }}</span>
+        <span>{{ this.cat.comment }}</span>
       </div>
       <div class="actions">
         <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="/#/post">
@@ -22,11 +22,17 @@
 </template>
 
 <script>
-import data from '../data'
+import firebase from '../service/firebase'
+
 export default {
+  mounted () {
+    firebase.database.ref('cat/' + this.$route.params.id).once('value').then(snapshot => {
+      this.cat = snapshot.val()
+    })
+  },
   data () {
     return {
-      'pictures': data.pictures
+      'cat': {}
     }
   }
 }
@@ -39,15 +45,6 @@ export default {
   }
 
   .info {
-  .card-image {
-    width: 100%;
-    height: 100%;
-  }
-  .card-image__picture > img {
-    color: #fff;
-    width:100%;
-  }
-  .card-image__info {
     text-align: right;
     padding: 5px;
     color: #555;
@@ -57,9 +54,5 @@ export default {
   .comment {
     padding: 10px;
     color: #555;
-  }
-
-  .actions {
-    text-align: center;
   }
 </style>
