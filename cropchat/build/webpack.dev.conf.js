@@ -1,3 +1,4 @@
+var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
@@ -5,6 +6,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var manifesPlugin = require('pwa-manifest-webpack-plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -18,6 +20,15 @@ module.exports = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    new manifesPlugin({
+      name: 'CropChat',
+      description: 'CropChat - Image Messenger Application',
+      display: 'fullscreen',
+      icon: {
+        src: path.resolve('src/assets/logo.png'),
+        sizes: [200]
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
