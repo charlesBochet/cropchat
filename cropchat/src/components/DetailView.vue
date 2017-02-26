@@ -39,6 +39,15 @@ export default {
   }
 
   .info {
+  .card-image {
+    width: 100%;
+    height: 100%;
+  }
+  .card-image__picture > img {
+    color: #fff;
+    width:100%;
+  }
+  .card-image__info {
     text-align: right;
     padding: 5px;
     color: #555;

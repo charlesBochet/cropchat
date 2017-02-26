@@ -67,4 +67,29 @@ export default {
     font-size: 14px;
     font-weight: bold;
   }
+
+  .card-image.mdl-card {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .card-image__picture > img {
+    width:100%;
+  }
+
+  .card-image__comment {
+    position: absolute;
+    bottom: 0;
+    height: 52px;
+    padding: 16px;
+    text-align: right;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+
+  .card-image__comment > span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+  }
 </style>
