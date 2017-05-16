@@ -8,7 +8,8 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var manifesPlugin = require('pwa-manifest-webpack-plugin')
+
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -28,15 +29,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    new manifesPlugin({
-      name: 'CropChat',
-      description: 'CropChat - Image Messenger Application',
-      display: 'fullscreen',
-      icon: {
-        src: path.resolve('src/assets/logo.png'),
-        sizes: [200]
-      }
-    }),
+    new CopyWebpackPlugin([
+      { from: 'src/manifest.json', to: 'manifest.json' },
+      { from: 'src/assets/logo.png', to: 'logo.png' },
+    ]),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env

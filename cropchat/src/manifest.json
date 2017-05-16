@@ -1,0 +1,16 @@
+{
+  "orientation": "portrait",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }
+  ],
+  "name": "CropChat",
+  "start_url": "/",
+  "description": "CropChat",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3"
+}

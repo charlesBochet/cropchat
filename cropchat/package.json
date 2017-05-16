@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "material-design-lite": "^1.3.0",
-    "pwa-manifest-webpack-plugin": "^1.0.3",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0"
   },

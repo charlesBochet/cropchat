@@ -2,15 +2,15 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--8-col">
       <div class="picture">
-        <img :src="this.$data.pictures[$route.params.id].url" />
+        <img :src="this.pictures[$route.params.id].url" />
       </div>
       <div class="info">
-        <span>{{ this.$data.pictures[$route.params.id].info }}</span>
+        <span>{{ this.pictures[$route.params.id].info }}</span>
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
       <div class="comment">
-        <span>{{ this.$data.pictures[$route.params.id].comment }}</span>
+        <span>{{ this.pictures[$route.params.id].comment }}</span>
       </div>
       <div class="actions">
         <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="/#/post">
