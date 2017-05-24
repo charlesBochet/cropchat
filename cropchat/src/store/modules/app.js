@@ -1,0 +1,90 @@
+import * as urls from '../../api_variables'
+
+const state = {
+  Version: '0.4.1',
+  CurrentState: '',
+  CurrentPage: '',
+  PreviousPage: '',
+  NexPage: '',
+  PageHistory: [],
+  loading: false,
+  api_url: 'http://localhost:8080'
+}
+
+const getters = {
+  getVersion (state) {
+    return state.Version
+  },
+  getCurrentState (state) {
+    return state.CurrentState
+  },
+  getCurrentPage (state) {
+    return state.CurrentPage
+  },
+  getPageHistory (state) {
+    return state.PageHistory
+  },
+  getLoading (state) {
+    return state.loading
+  }
+}
+
+const mutations = {
+  setAPI (state, apiName) {
+    console.log('changing api')
+    if (apiName === 'mhs') {
+      state.api_url = 'https://api.microhuchasolidaria.org'
+    } else if (apiName === 'iwth') {
+      state.api_url = 'http://api.iwanttohelp.org.uk'
+    } else {
+      state.api_url = 'https://api.jevaisaider.org'
+    }
+    urls.API_URL.CurrentUrl = state.api_url
+  },
+  setCurrentState (state, newState) {
+    console.log('setting current_state')
+    state.CurrentState = newState
+  },
+  setCurrentPage (state, newPage) {
+    state.PageHistory.push(newPage)
+    state.CurrentPage = newPage
+  },
+  setLoading (state, newValue) {
+    state.loading = newValue
+  },
+  goToPreviousPage (state) {
+    if (state.PreviousPage) {
+      // go back to previous page
+      state.CurrentPage = state.PreviousPage
+      // set the page you came back from to be next page
+      state.NexPage = state.PageHistory.pop()
+    }
+  },
+  goToNextPage (state) {
+    if (state.NexPage) {
+      // put the current page to to history
+      state.PreviousPage = state.CurrentPage
+      // go to next page
+      state.CurrentPage = state.NexPage
+    }
+  }
+}
+
+const actions = {
+  changeCurrentState (context) {
+    context.commit('setCurrentState', context)
+  },
+  changeCurrentPage (context) {
+    context.commit('setCurrentPage', context)
+  },
+  changeLoading (context) {
+    context.commit('setLoading', context)
+  }
+}
+
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+}
