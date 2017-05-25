@@ -2,7 +2,7 @@
 export const LOCAL_API_URL = 'http://localhost:8080'
 export const MHS_API_URL = 'https://api.microhuchasolidaria.org'
 
-export var API_URL = {CurrentUrl: MHS_API_URL}
+export var API_URL = {CurrentUrl: MHS_API_URL, LastURL: ''}
 export const LOGIN_URL = '/signin'
 export const SIGNUP_URL = '/signup'
 export const FACEBOOK_LOGIN_URL = '/signin/facebook'
