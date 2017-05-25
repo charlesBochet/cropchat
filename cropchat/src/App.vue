@@ -80,8 +80,9 @@
       </div>
 
       <div class='bottom-menu'>
-        <label class='version'>
-          Version: {{$store.getters.getVersion}}
+        <label :class="$store.getters.getAppMode == 'test' ? 'test-mode version': 'version'">
+          <span @click="updateVNCC">Version: {{$store.getters.getVersion}}</span>
+          <span style="color: #EEE">{{$store.getters.getVNCC}}</span>
           <a target='_blank' :href='helpLink'> <i class='fa fa-question-circle-o fa-fw'></i>
             {{$t('Help')}}
           </a>
@@ -221,6 +222,9 @@ export default {
     }
   },
   methods: {
+    updateVNCC () {
+      this.$store.commit('incrementVNCC')
+    },
     getDonationMetrics () {
       if ((this.$store.getters.getCurrentPage !== 'home') && (this.$store.getters.getCurrentPage !== '')) {
         return
@@ -419,6 +423,10 @@ a {
   left: 0;
   max-width: 290px;
   width: 92%;
+}
+#wrapper .bottom-menu .test-mode {
+  color: #FFF;
+  background-color: darkgreen;
 }
 #wrapper .bottom-menu .version {
   text-align: center;

@@ -8,10 +8,19 @@ const state = {
   NexPage: '',
   PageHistory: [],
   loading: false,
-  api_url: 'http://localhost:8080'
+  api_url: 'http://localhost:8080',
+  testMode: false,
+  // version number click counter
+  VNCC: 0
 }
 
 const getters = {
+  getAppMode (state) {
+    return state.testMode ? 'test' : 'normal'
+  },
+  getVNCC (state) {
+    return state.VNCC
+  },
   getVersion (state) {
     return state.Version
   },
@@ -30,6 +39,17 @@ const getters = {
 }
 
 const mutations = {
+  incrementVNCC (state) {
+    state.VNCC += 1
+    if (state.VNCC === 5) {
+      state.testMode = true
+      urls.API_URL.LastURL = urls.API_URL.CurrentUrl
+      urls.API_URL.CurrentUrl = 'https://api-test.microhuchasolidaria.org'
+    } else if (state.VNCC > 5) {
+      state.VNCC = 0
+      state.testMode = false
+    }
+  },
   setAPI (state, apiName) {
     console.log('changing api')
     if (apiName === 'mhs') {
