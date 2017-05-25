@@ -2,10 +2,10 @@
   <div class="">
     <div :dir='currentLangDirection' id='wrapper' v-bind:class='getWidthClass'>
       <div class='langs btn-group btn-group-xs' role='group'>
-        <button type='button' @click="setLang('en')" class='btn btn-default'>English</button>
-        <button type='button' @click="setLang('es')" class='btn btn-default'>Español</button>
-        <button type='button' @click="setLang('fr')" class='btn btn-default'>Français</button>
-        <button type='button' @click="setLang('ar')" class='btn btn-default'>العربية</button>
+        <button type='button' @click="setLang('en')" :class=" lang === 'en' || lang === '' ? 'btn btn-success' : 'btn btn-default'">English</button>
+        <button type='button' @click="setLang('es')" :class=" lang === 'es' ? 'btn btn-success' : 'btn btn-default'">Español</button>
+        <button type='button' @click="setLang('fr')" :class=" lang === 'fr' ? 'btn btn-success' : 'btn btn-default'">Français</button>
+        <button type='button' @click="setLang('ar')" :class=" lang === 'ar' ? 'btn btn-success' : 'btn btn-default'">العربية</button>
         <span class='hidden'>{{currentState}}</span>
       </div>
       <div class='loading' v-if="$store.getters.getLoading">
@@ -80,7 +80,12 @@
       </div>
 
       <div class='bottom-menu'>
-        <label class='version'> Version: {{$store.getters.getVersion}} <a target='_blank' href='https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki'> <i class='fa fa-question-circle-o fa-fw'></i>Help </a> </label>
+        <label class='version'>
+          Version: {{$store.getters.getVersion}}
+          <a target='_blank' :href='helpLink'> <i class='fa fa-question-circle-o fa-fw'></i>
+            {{$t('Help')}}
+          </a>
+        </label>
       </div>
 
     </div>
@@ -206,7 +211,9 @@ export default {
   },
   data () {
     return {
-      langDirection: ''
+      langDirection: '',
+      helpLink: 'https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki/Help',
+      lang: 'en'
     }
   },
   methods: {
@@ -214,6 +221,11 @@ export default {
       this.$i18n.set(lang)
       localStorage.setItem('user_locale', lang)
       this.langDirection = this.getLangDir()
+      this.helpLink = this.setHelpUrl(lang)
+      this.lang = lang
+    },
+    getLang () {
+      return localStorage.getItem('user_locale')
     },
     // getWalletBalance () {},
     goSharePage (e) {
@@ -241,6 +253,18 @@ export default {
         return 'ltr'
       }
       return 'rtl'
+    },
+    setHelpUrl (lang) {
+      var url = 'https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki/'
+      if (lang === 'ar') {
+        return url + 'مساعدة'
+      } else if (lang === 'fr') {
+        return url + 'Aide'
+      } else if (lang === 'es') {
+        return url + 'Ayuda'
+      } else {
+        return url + 'Help'
+      }
     }
   },
   computed: {
