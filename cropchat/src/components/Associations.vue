@@ -17,6 +17,14 @@
 
 <script>
 import * as urls from '../api_variables'
+
+import axios from 'axios'
+var jwtToken = localStorage.getItem('user_token')
+
+const http = axios.create({
+  headers: { 'Authorization': `Bearer ${jwtToken}` }
+})
+
 export default {
   beforeMount () {
     console.log('beforeUpdate')
@@ -40,7 +48,7 @@ export default {
       this.$store.commit('setCurrentPage', 'asso_details')
     },
     getAssociationsFromAPI () {
-      var jwtToken = localStorage.getItem('user_token')
+      // var jwtToken = localStorage.getItem('user_token')
       var vm = this
       let country = localStorage.getItem('country_code')
       if (country == null) {
@@ -48,26 +56,46 @@ export default {
       }
       console.log('Searching for ' + country)
       let url = urls.API_URL.CurrentUrl + urls.ASSO_SEARCH_URL + '?country=' + country
-      this.$http.headers.common['Authorization'] = 'Bearer ' + jwtToken
-      this.$http.post(url, {POS_id: 1, country: country})
-          .then(resp => {
-            console.log(resp.status)
-            console.log(resp.statusText)
-            console.log(resp)
-            if (resp.data) {
-              vm.$store.commit('setAssoList', resp.data)
-            } else {
-              vm.$store.commit('setErrors', [{error: 'Unable to set associations list'}])
-            }
-          }, err => {
-            if (!err.data) {
-              vm.$store.commit('setError', {error: 'Error while loading associations list'})
-              return
-            }
-            if (err.data.errors) {
-              vm.$store.commit('setErrors', err.data.errors)
-            }
-          })
+
+      http.post(url, {POS_id: 1, country: country}).then(resp => {
+        console.log(resp.status)
+        console.log(resp.statusText)
+        console.log(resp)
+        if (resp.data) {
+          vm.$store.commit('setAssoList', resp.data)
+        } else {
+          vm.$store.commit('setErrors', [{error: 'Unable to set associations list'}])
+        }
+      }).catch(err => {
+        if (!err.data) {
+          vm.$store.commit('setError', {error: 'Error while loading associations list'})
+          return
+        }
+        if (err.data.errors) {
+          vm.$store.commit('setErrors', err.data.errors)
+        }
+      })
+
+      // this.$http.headers.common['Authorization'] = 'Bearer ' + jwtToken
+      // this.$http.post(url, {POS_id: 1, country: country})
+      //     .then(resp => {
+      //       console.log(resp.status)
+      //       console.log(resp.statusText)
+      //       console.log(resp)
+      //       if (resp.data) {
+      //         vm.$store.commit('setAssoList', resp.data)
+      //       } else {
+      //         vm.$store.commit('setErrors', [{error: 'Unable to set associations list'}])
+      //       }
+      //     }, err => {
+      //       if (!err.data) {
+      //         vm.$store.commit('setError', {error: 'Error while loading associations list'})
+      //         return
+      //       }
+      //       if (err.data.errors) {
+      //         vm.$store.commit('setErrors', err.data.errors)
+      //       }
+      //     })
     }
   },
   computed: {
