@@ -4,11 +4,11 @@
     <div class="association-box">
       <div class="">
         <div class="btn-group donation-section" role="group" aria-label="donation-section">
-          <button type="button" @click="donationAmount=200" :class="'btn btn-default' + (donationAmount == 200 ? ' active' : '')">&euro 2</button>
-          <button type="button" @click="donationAmount=400" :class="'btn btn-default' + (donationAmount == 400 ? ' active' : '')">&euro 4</button>
-          <button type="button" @click="donationAmount=600" :class="'btn btn-default' + (donationAmount == 600 ? ' active' : '')">&euro 6</button>
-          <button type="button" @click="donationAmount=800" :class="'btn btn-default' + (donationAmount == 800 ? ' active' : '')">&euro 8</button>
-          <button type="button" @click="donationAmount=1000" :class="'btn btn-default' + (donationAmount == 1000 ? ' active' : '')">&euro 10</button>
+          <button type="button" @click="donationAmount=200" :class="'btn btn-default' + (donationAmount == 200 ? ' active' : '')">&euro; 2</button>
+          <button type="button" @click="donationAmount=400" :class="'btn btn-default' + (donationAmount == 400 ? ' active' : '')">&euro; 4</button>
+          <button type="button" @click="donationAmount=600" :class="'btn btn-default' + (donationAmount == 600 ? ' active' : '')">&euro; 6</button>
+          <button type="button" @click="donationAmount=800" :class="'btn btn-default' + (donationAmount == 800 ? ' active' : '')">&euro; 8</button>
+          <button type="button" @click="donationAmount=1000" :class="'btn btn-default' + (donationAmount == 1000 ? ' active' : '')">&euro; 10</button>
           <button :disabled="donationAmount < 200" @click="submitDonation" class="btn btn-primary pull-right donate-btn" type="button" name="donate">{{$t('Donate')}}</button>
         </div>
 
@@ -22,7 +22,7 @@
         <li class="list-group-item" :title="$t('address')"><i class="fa fa-map fa-fw"></i>  <span class="assoc-labels">{{assoc.address}}</span></li>
         <li class="list-group-item" :title="$t('city')"><i class="fa fa-map-marker fa-fw"></i>  <span class="assoc-labels">{{assoc.city}}</span></li>
         <li class="list-group-item" :title="$t('twitter')"><i class="fa fa-twitter fa-fw"></i>  <span class="assoc-labels"><a target="_blank" :href="'https://twitter.com/'+assoc.twitter_username">@{{assoc.twitter_username}}</a></span></li>
-        <li class="list-group-item" :title="$t('Total Donations')"><i class="fa fa-line-chart fa-fw"></i>  <span class="assoc-labels">&euro {{assoc.total_donations/100}}</span></li>
+        <li class="list-group-item" :title="$t('Total Donations')"><i class="fa fa-line-chart fa-fw"></i>  <span class="assoc-labels">&euro; {{assoc.total_donations/100}}</span></li>
       </ul>
     </div>
 
