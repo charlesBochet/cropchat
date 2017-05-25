@@ -138,7 +138,9 @@ export default {
     loginUser (e) {
       e.preventDefault()
       console.log('COUNTRY: ' + this.country)
-      this.$store.commit('setAPI', this.country.db)
+      if (this.$store.getters.getAppMode !== 'test') {
+        this.$store.commit('setAPI', this.country.db)
+      }
       this.$store.commit('setLoading', true)
       let country = localStorage.getItem('country')
       if (!country) {
