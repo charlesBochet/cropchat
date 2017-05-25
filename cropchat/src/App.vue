@@ -80,7 +80,7 @@
       </div>
 
       <div class='bottom-menu'>
-        <label class='version'> <a target='_blank' href='https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki'> Version: {{$store.getters.getVersion}} BETA </a> </label>
+        <label class='version'> Version: {{$store.getters.getVersion}} <a target='_blank' href='https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki'> <i class='fa fa-question-circle-o fa-fw'></i>Help </a> </label>
       </div>
 
     </div>
@@ -101,6 +101,13 @@ import SolidarityAccount from './components/SolidarityAccount.vue'
 import Settings from './components/Settings.vue'
 
 import * as urls from './api_variables'
+import axios from 'axios'
+
+var jwtToken = localStorage.getItem('user_token')
+
+const http = axios.create({
+  headers: { 'Authorization': `Bearer ${jwtToken}` }
+})
 
 export default {
   mounted () {
@@ -129,10 +136,8 @@ export default {
         return
       }
       var vm = this
-      var jwtToken = localStorage.getItem('user_token')
-      this.$http.headers.common['Authorization'] = 'Bearer ' + jwtToken
       let url = urls.API_URL.CurrentUrl + urls.WALLET_BALANCE_URL
-      this.$http.get(url).then(resp => {
+      http.get(url).then(resp => {
         if (!resp.data) {
           console.log('no response data')
           return
@@ -144,8 +149,8 @@ export default {
           vm.$store.commit('setCurrency', resp.data.balance.Currency)
           vm.$store.commit('setBalance', resp.data.balance.Amount)
         }
-      }, err => {
-        console.log('failed')
+      }).catch(err => {
+        console.log('axios failed')
         console.log(err.data)
       })
     })
