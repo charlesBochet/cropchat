@@ -2,7 +2,7 @@
   <div>
     <h4>{{$t('hi')}}, {{getUsername}}</h4>
     <p>
-      {{$t('Thanks for your generous heart. You\'re changing the world for a lot of people who lost hope')}}
+      {{$t('Thanks for your generous heart. You are changing the world for a lot of people who lost hope')}}
     </p>
 
     <div class="btn-group btn-group-vertical btn-block" role="group" aria-label="home-menu-items">
