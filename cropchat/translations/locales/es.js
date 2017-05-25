@@ -69,7 +69,8 @@ const localizations = {
   'MA': 'Marruecos',
   'TN': 'Túnez',
   'GB': '',
-  'US': ''
+  'US': '',
+  'Help': 'Ayuda'
 }
 
 export default localizations
