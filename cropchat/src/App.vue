@@ -107,7 +107,6 @@ import Settings from './components/Settings.vue'
 
 import * as urls from './api_variables'
 import axios from 'axios'
-
 var jwtToken = localStorage.getItem('user_token')
 
 const http = axios.create({
@@ -121,6 +120,10 @@ export default {
     this.$events.listen('logoutEvent', eventData => {
       console.log('LOGING OUT EVENT')
       console.log(eventData)
+    })
+
+    this.$events.listen('checkDonationMeterics', eventData => {
+      this.getDonationMetrics()
     })
 
     this.$events.listen('loginEvent', eventData => {
@@ -142,6 +145,8 @@ export default {
       }
       var vm = this
       let url = urls.API_URL.CurrentUrl + urls.WALLET_BALANCE_URL
+      console.log('http')
+      console.log(http)
       http.get(url).then(resp => {
         if (!resp.data) {
           console.log('no response data')
@@ -153,14 +158,13 @@ export default {
           console.log('no balance data')
           vm.$store.commit('setCurrency', resp.data.balance.Currency)
           vm.$store.commit('setBalance', resp.data.balance.Amount)
+          vm.$events.$emit('acountUpdate', {})
         }
       }).catch(err => {
         console.log('axios failed')
         console.log(err.data)
       })
     })
-
-    this.$events.$emit('acountUpdate', {})
   },
   beforeCreate () {
     console.log('beforeCreate')
@@ -217,6 +221,40 @@ export default {
     }
   },
   methods: {
+    getDonationMetrics () {
+      if ((this.$store.getters.getCurrentPage !== 'home') && (this.$store.getters.getCurrentPage !== '')) {
+        return
+      }
+      var vm = this
+      let url = urls.API_URL.CurrentUrl + urls.DONATION_URL
+
+      http.get(url).then(resp => {
+        console.log('call success')
+        console.log(resp.data)
+        if (resp.data) {
+          if (resp.data.total_donations) {
+            vm.$store.commit('setDonationTotal', resp.data)
+            vm.loadingDonationMetrics = true
+          }
+        }
+      }).catch(err => {
+        console.log('call error')
+        console.log(err.status + ': ' + err.statusText)
+      })
+      // this.$http.get(url).then(resp => {
+      //   console.log('call success')
+      //   console.log(resp.data)
+      //   if (resp.data) {
+      //     if (resp.data.total_donations) {
+      //       vm.$store.commit('setDonationTotal', resp.data)
+      //       vm.loadingDonationMetrics = true
+      //     }
+      //   }
+      // }, err => {
+      //   console.log('call error')
+      //   console.log(err.status + ': ' + err.statusText)
+      // })
+    },
     setLang (lang) {
       this.$i18n.set(lang)
       localStorage.setItem('user_locale', lang)
