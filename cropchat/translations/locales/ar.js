@@ -57,7 +57,7 @@ const localizations = {
   'Logout': 'الخروج',
   'EUR': 'يورو',
   'Donation Destination': 'جهة التبرع',
-  'Sorry, your donation to this association failed': 'عذرا، فشل التبرع لهذا الارتباط',
+  'Sorry, your donation to this association failed': 'عذرا، فشل التبرع لهذا الجمعية الخيرية',
   'donation successful': 'نجحت في التبرع',
   '2 euros are the least amount you can donate': 'أقل كميةيمكن أن تتبرع 20 يورو',
   'Invalid association id': 'معرف الجمعية غير صحيح',
