@@ -1,12 +1,13 @@
 {
-  "name": "cropchat",
+  "name": "fundraising-webapp",
   "version": "1.0.0",
-  "description": "Image messenging application",
-  "author": "Charles BOCHET <charlesb@theodo.fr>",
+  "description": "Fundraising Webapp",
+  "author": "Mahdi <boolow5@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
+    "deploy": "bash deploy.sh",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
