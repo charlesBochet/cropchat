@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import * as urls from '../api_variables'
 
 export default {
   data () {
@@ -44,26 +43,6 @@ export default {
       e.preventDefault()
       this.$store.commit('setCurrentPage', 'solidarity')
       this.$store.commit('resetMessages')
-    },
-    getDonationMetrics () {
-      if ((this.$store.getters.getCurrentPage !== 'home') && (this.$store.getters.getCurrentPage !== '')) {
-        return
-      }
-      var vm = this
-      let url = urls.API_URL.CurrentUrl + urls.DONATION_URL
-      this.$http.get(url).then(resp => {
-        console.log('call success')
-        console.log(resp.data)
-        if (resp.data) {
-          if (resp.data.total_donations) {
-            vm.$store.commit('setDonationTotal', resp.data)
-            vm.loadingDonationMetrics = true
-          }
-        }
-      }, err => {
-        console.log('call error')
-        console.log(err.status + ': ' + err.statusText)
-      })
     }
   },
   computed: {
@@ -84,7 +63,7 @@ export default {
     getDonationSum () {
       // get the donation
       var vm = this
-      setTimeout(() => { vm.getDonationMetrics() }, 10000)
+      setTimeout(() => { vm.$events.$emit('checkDonationMeterics') }, 10000)
       return this.$store.getters.getDonationsTotal
     }
   }
