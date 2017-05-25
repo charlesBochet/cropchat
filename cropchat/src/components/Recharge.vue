@@ -59,8 +59,7 @@ h5 {
   font-size: 1em;
 }
 .recharge-btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  margin-top: .3em;
 }
 .month-input .form-control, .year-input .form-control {
   width: 5em;
