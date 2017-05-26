@@ -2,6 +2,8 @@
   <div class="signup-area-wrapper">
     <h1>{{$t('Sign up')}}</h1>
 
+    <button class="btn btn-default btn-xs btn-block">{{$t('Signup as Establishment')}}</button>
+
     <form class="form">
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('First name')" id="fname-addon1"> <i class="fa fa-user-o fa-fw" aria-hidden="true"></i> </span>
