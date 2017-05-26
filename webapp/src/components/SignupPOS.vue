@@ -2,8 +2,6 @@
   <div class="signup-area-wrapper">
     <h1>{{$t('Sign up')}}</h1>
 
-    <button class="btn btn-default btn-xs btn-block">{{$t('Signup as Establishment')}}</button>
-
     <form class="form">
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('First name')" id="fname-addon1"> <i class="fa fa-user-o fa-fw" aria-hidden="true"></i> </span>
@@ -55,7 +53,7 @@
         <input name="password" class="form-control" v-model="signup.password"  @input="updatePassword" aria-describedby="password-addon1" type="password" :placeholder="$t('Password')" :value="signup.password" />
       </div>
 
-      {{$t('If you already have an account')}} <a class="" @click="goToLoginPage" > {{$t('Login here')}}</a>
+      {{$t('If you already have an account')}} <a class="" @click="goToLoginPOSPage" > {{$t('Login here')}}</a>
 
       <button class="btn btn-primary btn-block signup-btn" @click="signupUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
 
@@ -121,8 +119,8 @@ export default {
 
   },
   methods: {
-    goToLoginPage (e) {
-      this.$store.commit('setCurrentPage', 'login')
+    goToLoginPOSPage (e) {
+      this.$store.commit('setCurrentPage', 'loginPOS')
       this.$store.commit('resetMessages')
     },
     updateNationality (e) {
@@ -170,9 +168,9 @@ export default {
       console.log(creds.birthday)
       // var setMyToken = this.setUserToken
       var setReponseMessage = this.setMessage
-      var goToLoginPage = () => {
-        vm.$store.commit('setCurrentPage', 'login')
-        vm.$store.commit('setCurrentState', 'login')
+      var goToLoginPOSPage = () => {
+        vm.$store.commit('setCurrentPage', 'loginPOS')
+        vm.$store.commit('setCurrentState', 'loginPOS')
         vm.$store.commit('resetMessages')
       }
       this.$store.commit('resetMessages')
@@ -188,7 +186,7 @@ export default {
               data = resp.data
               if (data.message) {
                 setReponseMessage({'success': 'Signed up successfully!'})
-                goToLoginPage()
+                goToLoginPOSPage()
               }
             }
           }

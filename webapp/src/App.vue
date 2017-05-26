@@ -31,6 +31,9 @@
             <div v-if="$store.getters.getCurrentPage == 'signup'">
               <signup-form></signup-form>
             </div>
+            <div v-if="$store.getters.getCurrentPage == 'signupPOS'">
+              <signup-pos-form></signup-pos-form>
+            </div>
             <div v-if="$store.getters.getCurrentPage == 'share'">
               <share-page></share-page>
             </div>
@@ -98,6 +101,7 @@ import Home from './components/Home.vue'
 import Logout from './components/Logout.vue'
 import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
+import SignupPOS from './components/SignupPOS.vue'
 import Messages from './components/Messages.vue'
 import Share from './components/Share.vue'
 import Associations from './components/Associations.vue'
@@ -111,7 +115,7 @@ import axios from 'axios'
 var jwtToken = localStorage.getItem('user_token')
 
 const http = axios.create({
-  headers: { 'Authorization': `Bearer ${jwtToken}` }
+  headers: { 'Authorization': 'Bearer ' + jwtToken }
 })
 
 export default {
@@ -148,7 +152,10 @@ export default {
       let url = urls.API_URL.CurrentUrl + urls.WALLET_BALANCE_URL
       console.log('http')
       console.log(http)
-      http.get(url).then(resp => {
+      axios({
+        url: url,
+        headers: { 'Authorization': 'Bearer ' + jwtToken }
+      }).then(resp => {
         if (!resp.data) {
           console.log('no response data')
           return
@@ -159,7 +166,6 @@ export default {
           console.log('no balance data')
           vm.$store.commit('setCurrency', resp.data.balance.Currency)
           vm.$store.commit('setBalance', resp.data.balance.Amount)
-          vm.$events.$emit('acountUpdate', {})
         }
       }).catch(err => {
         console.log('axios failed')
@@ -345,6 +351,7 @@ export default {
     'share-page': Share,
     'login-form': Login,
     'signup-form': Signup,
+    'signup-pos-form': SignupPOS,
     'logout-button': Logout,
     'message-items': Messages,
     'associations-page': Associations,
