@@ -2,8 +2,6 @@
   <div class="signup-area-wrapper">
     <h1>{{$t('Sign up')}}</h1>
 
-    <button class="btn btn-default btn-xs btn-block">{{$t('Signup as Establishment')}}</button>
-
     <form class="form">
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('First name')" id="fname-addon1"> <i class="fa fa-user-o fa-fw" aria-hidden="true"></i> </span>
@@ -61,6 +59,8 @@
 
     </form>
 
+    <button class="btn btn-default btn-xs btn-block" @click="goToSignupPOSPage">{{$t('Signup as Establishment')}}</button>
+
   </div>
 </template>
 
@@ -95,6 +95,9 @@ a {
 .input-group {
   margin-bottom: .3em;
 }
+.btn-xs {
+  margin-top: .2em;
+}
 </style>
 
 <script>
@@ -121,18 +124,27 @@ export default {
 
   },
   methods: {
+    goToSignupPOSPage (e) {
+      e.preventDefault()
+      this.$store.commit('setCurrentPage', 'signupPOS')
+      this.$store.commit('resetMessages')
+    },
     goToLoginPage (e) {
+      e.preventDefault()
       this.$store.commit('setCurrentPage', 'login')
       this.$store.commit('resetMessages')
     },
     updateNationality (e) {
+      e.preventDefault()
       console.log(e.log)
       this.signup.nationality = e.code
     },
     updateEmail (e) {
+      e.preventDefault()
       this.$store.commit('updateEmail', this.signup.mail)
     },
     updatePassword (e) {
+      e.preventDefault()
       this.$store.commit('updatePassword', this.signup.password)
     },
     setMessage (response) {

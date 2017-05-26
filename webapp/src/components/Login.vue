@@ -66,6 +66,9 @@ a {
 .input-group {
   margin-top: .1em;
 }
+.btn-xs {
+  margin-top: .2em;
+}
 </style>
 
 <script>
