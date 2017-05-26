@@ -2,8 +2,6 @@
   <div class="login-area-wrapper">
     <h1>{{$t('Login')}}</h1>
 
-    <button class="btn btn-default btn-xs btn-block">{{$t('Login as Establishment')}}</button>
-
     <form class="form">
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('Country')" id="country-addon1"> {{$t('Donation Destination')}}</span>
@@ -28,6 +26,7 @@
     </form>
 
     <video-frame></video-frame>
+    <button class="btn btn-default btn-xs btn-block">{{$t('Login as Establishment')}}</button>
 
   </div>
 </template>
@@ -56,8 +55,8 @@ a {
   cursor: pointer;
 }
 .login-btn {
-  margin-top: .5em;
-  margin-bottom: .3em;
+  margin-top: .1em;
+  margin-bottom: .2em;
 }
 .fb-login-button {
 }
@@ -65,7 +64,7 @@ a {
   margin: auto;
 }
 .input-group {
-  margin-bottom: .3em;
+  margin-top: .1em;
 }
 </style>
 
