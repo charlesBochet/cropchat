@@ -1,8 +1,16 @@
 <template>
   <div class="signup-area-wrapper">
+<!--
+    <vodal :show="readTerms" animation="rotate" @hide="readTerms = true">
+        <terms-modal></terms-modal>
+    </vodal> -->
+
     <h1>{{$t('Sign up')}}</h1>
 
     <form class="form">
+
+      <h5>{{$t('Personal Info')}}</h5>
+
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('First name')" id="fname-addon1"> <i class="fa fa-user-o fa-fw" aria-hidden="true"></i> </span>
         <input name="first_name" class="form-control" v-model="signup.first_name" aria-describedby="fname-addon1" type="text" :placeholder="$t('First name')" :value="signup.first_name" />
@@ -43,6 +51,43 @@
 
       </div>
 
+
+      <h5>{{$t('Establishment Info')}}</h5>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Establishment name')" id="POS_name-addon1"> <i class="fa fa-institution fa-fw" aria-hidden="true"></i> </span>
+        <input name="first_name" class="form-control" v-model="signup.POS_name" aria-describedby="POS_name-addon1" type="text" :placeholder="$t('Establishment name')" :value="signup.POS_name" />
+      </div>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('CIF Code')" id="cif-addon1"> <i class="fa fa-institution fa-fw" aria-hidden="true"></i> </span>
+        <input name="first_name" class="form-control" v-model="signup.cif" aria-describedby="cif-addon1" type="text" :placeholder="$t('CIF Code')" :value="signup.cif" />
+      </div>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Country')" id="POS_country-addon1"> <i class="fa fa-globe fa-fw" aria-hidden="true"></i> </span>
+        <select class="form-control" aria-describedby="POS_country-addon1" v-model="signup.POS_country">
+          <option v-for="country in $store.getters.getAllCountries" :disabled="country.code == '_'" :selected="country.code == 'ES'" @changed="signup.POS_country = country.code" :value="country.code">{{$t(country.name)}}</option>
+        </select>
+      </div>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('City')" id="citry-addon1"> <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> </span>
+        <input name="city" class="form-control" v-model="signup.citry" aria-describedby="citry-addon1" type="text" :placeholder="$t('City')" :value="signup.citry" />
+      </div>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Zip Code')" id="POS_zip-addon1"> <i class="fa fa-map-pin fa-fw" aria-hidden="true"></i> </span>
+        <input name="first_name" class="form-control" v-model="signup.POS_zip" aria-describedby="POS_zip-addon1" type="number" :placeholder="$t('Zip Code')" :value="signup.POS_zip" />
+      </div>
+
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Address')" id="POS_address-addon1"> <i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> </span>
+        <input name="first_name" class="form-control" v-model="signup.POS_address" aria-describedby="POS_address-addon1" type="text" :placeholder="$t('Address')" :value="signup.POS_address" />
+      </div>
+
+
+
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" title="Email" id="email-addon1"> <i class="fa fa-envelope fa-fw" aria-hidden="true"></i> </span>
         <input name="mail" class="form-control" v-model="signup.mail" @input="updateEmail" aria-describedby="email-addon1" type="email" :placeholder="$t('Email')" :value="signup.email" />
@@ -53,9 +98,16 @@
         <input name="password" class="form-control" v-model="signup.password"  @input="updatePassword" aria-describedby="password-addon1" type="password" :placeholder="$t('Password')" :value="signup.password" />
       </div>
 
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" title="Password" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
+        <label class="form-control" for="accept_terms"  aria-describedby="terms-addon1">{{$t('Terms and conditions')}}</label>
+      </div>
+
       {{$t('If you already have an account')}} <a class="" @click="goToLoginPOSPage" > {{$t('Login here')}}</a>
 
       <button class="btn btn-primary btn-block signup-btn" @click="signupUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
+
+      <button class="btn btn-default btn-xs btn-block" @click="goToSignupPage">{{$t('Signup as User')}}</button>
 
     </form>
 
@@ -93,10 +145,14 @@ a {
 .input-group {
   margin-bottom: .3em;
 }
+.btn-xs {
+  margin-top: .2em;
+}
 </style>
 
 <script>
 import * as urls from '../api_variables'
+import Terms from './Terms.vue'
 
 export default {
 
@@ -105,32 +161,50 @@ export default {
       signup: {
         first_name: '',
         last_name: '',
-        status: 'USER',
+        status: 'POS',
         birthday: '',
         gender: '',
         nationality: 'ES',
         country_of_residence: 'ES',
+
+        POS_name: '',
+        cif: '',
+        POS_zip: '',
+        country: '',
+        POS_address: '',
+
         mail: '',
         password: ''
-      }
+      },
+      readTerms: false,
+      acceptTerms: false
     }
   },
   computed: {
 
   },
   methods: {
+    goToSignupPage (e) {
+      e.preventDefault()
+      this.$store.commit('setCurrentPage', 'signup')
+      this.$store.commit('resetMessages')
+    },
     goToLoginPOSPage (e) {
-      this.$store.commit('setCurrentPage', 'loginPOS')
+      e.preventDefault()
+      this.$store.commit('setCurrentPage', 'login')
       this.$store.commit('resetMessages')
     },
     updateNationality (e) {
+      e.preventDefault()
       console.log(e.log)
       this.signup.nationality = e.code
     },
     updateEmail (e) {
+      e.preventDefault()
       this.$store.commit('updateEmail', this.signup.mail)
     },
     updatePassword (e) {
+      e.preventDefault()
       this.$store.commit('updatePassword', this.signup.password)
     },
     setMessage (response) {
@@ -199,7 +273,7 @@ export default {
     }
   },
   components: {
-
+    'terms-modal': Terms
   }
 
 }
