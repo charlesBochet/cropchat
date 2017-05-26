@@ -1,15 +1,10 @@
 <template>
   <div class="logout-area">
-    <nav class="navbar navbar-default">
-      <div class="navbar-right">
-        <div class="container">
-          <button class="btn btn-danger btn-xs pull-right" :title="$t('Logout')" @click="logoutUser">{{$t('Logout')}}</button>
-          <button class="btn btn-default btn-xs pull-right" :title="$t('Settings')" @click="goToSettingsPage"> <i class="fa fa-cog fa-fw"></i> </button>
-          <label :class="balanceLabelClasses" :title="$t('Wallet Balance')" @click="goToSolidarityAccount"> {{$store.getters.getBalance}} {{$t($store.getters.getCurrency)}} </label>
-        </div>
-
-      </div>
-    </nav>
+    <div class="nav navbar-default">
+      <button class="btn btn-danger btn-xs pull-right" :title="$t('Logout')" @click="logoutUser">{{$t('Logout')}}</button>
+      <button class="btn btn-default btn-xs pull-right" :title="$t('Settings')" @click="goToSettingsPage"> <i class="fa fa-cog fa-fw"></i> </button>
+      <label :class="balanceLabelClasses" :title="$t('Wallet Balance')" @click="goToSolidarityAccount"> {{$store.getters.getBalance}} {{$t($store.getters.getCurrency)}} </label>
+    </div>
   </div>
 </template>
 
@@ -80,6 +75,16 @@ h5 {
 }
 .logout-area button {
   margin-left: .2em;
+}
+.logout-area {
+  height: 2em;
+}
+.logout-area .nav {
+  height: 2.2em;
+  padding: .3em;
+  margin:.3em;
+  border-radius: .3em;
+  box-shadow: inset 0 0 .3em #AAA;
 }
 .balance-label {
   padding: .15em;
