@@ -152,10 +152,11 @@ export default {
       let url = urls.API_URL.CurrentUrl + urls.WALLET_BALANCE_URL
       console.log('http')
       console.log(http)
-      axios({
-        url: url,
-        headers: { 'Authorization': 'Bearer ' + jwtToken }
-      }).then(resp => {
+      // axios({
+      //   url: url,
+      //   headers: { 'Authorization': 'Bearer ' + jwtToken }
+      // })
+      http.get(url).then(resp => {
         if (!resp.data) {
           console.log('no response data')
           return
