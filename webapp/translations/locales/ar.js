@@ -70,7 +70,8 @@ const localizations = {
   'TN': 'تونس',
   'GB': 'المملكة المتحدة',
   'US': 'الولايات المتحدة',
-  'Help': 'مساعدة'
+  'Help': 'مساعدة',
+  'Terms and conditions': 'الشروط والأحكام'
 }
 
 export default localizations

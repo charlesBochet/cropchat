@@ -70,7 +70,8 @@ const localizations = {
   'TN': 'Túnez',
   'GB': '',
   'US': '',
-  'Help': 'Ayuda'
+  'Help': 'Ayuda',
+  'Terms and conditions': 'Términos y condiciones'
 }
 
 export default localizations
