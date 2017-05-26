@@ -10,6 +10,9 @@ import VueResource from 'vue-resource'
 import vuexI18n from 'vuex-i18n'
 import VueEvents from 'vue-events'
 
+import Vodal from 'vodal'
+Vue.component(Vodal.name, Vodal)
+
 // import translations
 import Spanish from '../translations/locales/es'
 import French from '../translations/locales/fr'
@@ -19,6 +22,8 @@ require('expose-loader?$!expose-loader?jQuery!jquery')
 require('bootstrap-webpack')
 require('font-awesome/fonts/fontawesome-webfont.svg')
 require('../static/font-awesome-8500ab3a5a.js')
+import 'vodal/common.css'
+import 'vodal/rotate.css'
 
 Vue.use(vuexI18n.plugin, store)
 Vue.i18n.add('es', Spanish)
