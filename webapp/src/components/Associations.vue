@@ -1,6 +1,6 @@
 <template>
   <div class="associations-list">
-    <h1 @click="getAssociationsFromAPI">{{ $t('Charities') }} <i class="fa fa-refresh fa-fw"></i></h1>
+    <h1>{{ $t('Charities') }}</h1>
     <label class="label label-warning"> {{ $t('Page is under-construction') }} </label>
     <div class="association-box"
       @click="selectAssociation(assoc.id)"
