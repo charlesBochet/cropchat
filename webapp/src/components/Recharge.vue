@@ -68,7 +68,14 @@ h5 {
 
 <script>
 import * as urls from '../api_variables'
+
 import axios from 'axios'
+var jwtToken = localStorage.getItem('user_token')
+
+// const http = axios.create({
+//   headers: { 'Authorization': 'Bearer ' + jwtToken }
+// })
+
 export default {
   data () {
     var thisMonth = new Date().getUTCMonth()
@@ -180,31 +187,60 @@ export default {
     },
     rechargeAccount (token) {
       token = 'data=' + token
-      var jwtToken = localStorage.getItem('user_token')
+      // var jwtToken = localStorage.getItem('user_token')
       var vm = this
       var rechargeData = { amount: parseFloat(this.amount) * 100, token: token }
-      this.$http.headers.common['Authorization'] = 'Bearer ' + jwtToken
-      let url = urls.API_URL.CurrentUrl + urls.RECHARGE_ACCOUNT_URL
-      this.$http.post(url, rechargeData)
-        .then(resp => {
-          vm.$store.commit('setLoading', false)
-          vm.$events.$emit('acountUpdate', {})
-          vm.$store.commit('setSuccess', 'Recharge successful')
-        }, err => {
-          if (err.error) {
-            vm.$store.commit('setError', err.error)
-          } else if (err.errors) {
-            vm.$store.commit('setErrors', err.errors)
-          } else if (err.data.errors) {
-            vm.$store.commit('setErrors', err.data.errors)
-          } else if (err.data.error) {
-            vm.$store.commit('setError', err.data.error)
-          } else {
-            vm.$store.commit('setError', 'Error recharging account')
-          }
 
-          vm.$store.commit('setLoading', false)
-        })
+      let url = urls.API_URL.CurrentUrl + urls.RECHARGE_ACCOUNT_URL
+      axios({
+        method: 'post',
+        url: url,
+        data: rechargeData,
+        headers: { 'Authorization': 'Bearer ' + jwtToken }
+      }).then(resp => {
+        vm.$store.commit('setLoading', false)
+        vm.$events.$emit('acountUpdate', {})
+        vm.$store.commit('setSuccess', 'Recharge successful')
+      }).catch(err => {
+        console.log('Recharge request error')
+        console.log(err)
+        if (err.error) {
+          vm.$store.commit('setError', err.error)
+        } else if (err.errors) {
+          vm.$store.commit('setErrors', err.errors)
+        } else if (err.data.errors) {
+          vm.$store.commit('setErrors', err.data.errors)
+        } else if (err.data.error) {
+          vm.$store.commit('setError', err.data.error)
+        } else {
+          vm.$store.commit('setError', err)
+        }
+
+        vm.$store.commit('setLoading', false)
+      })
+
+      // this.$http.headers.common['Authorization'] = 'Bearer ' + jwtToken
+      //
+      // this.$http.post(url, rechargeData)
+      //   .then(resp => {
+      //     vm.$store.commit('setLoading', false)
+      //     vm.$events.$emit('acountUpdate', {})
+      //     vm.$store.commit('setSuccess', 'Recharge successful')
+      //   }, err => {
+      //     if (err.error) {
+      //       vm.$store.commit('setError', err.error)
+      //     } else if (err.errors) {
+      //       vm.$store.commit('setErrors', err.errors)
+      //     } else if (err.data.errors) {
+      //       vm.$store.commit('setErrors', err.data.errors)
+      //     } else if (err.data.error) {
+      //       vm.$store.commit('setError', err.data.error)
+      //     } else {
+      //       vm.$store.commit('setError', 'Error recharging account')
+      //     }
+      //
+      //     vm.$store.commit('setLoading', false)
+      //   })
     },
 
     rechargeFormIsValid () {
