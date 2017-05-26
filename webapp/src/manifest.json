@@ -8,9 +8,9 @@
       "type": "image/png"
     }
   ],
-  "name": "CropChat",
+  "name": "Fundraising API web-app",
   "start_url": "/",
-  "description": "CropChat",
+  "description": "Web interface for Micro Hucha Solidaria's Rest API",
   "theme_color": "#2196f3",
   "background_color": "#2196f3"
 }
