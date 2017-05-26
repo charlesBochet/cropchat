@@ -2,6 +2,8 @@
   <div class="login-area-wrapper">
     <h1>{{$t('Login')}}</h1>
 
+    <button class="btn btn-default btn-xs btn-block">{{$t('Login as Establishment')}}</button>
+
     <form class="form">
       <div dir="ltr" class="input-group">
         <span class="input-group-addon" :title="$t('Country')" id="country-addon1"> {{$t('Donation Destination')}}</span>
