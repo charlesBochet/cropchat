@@ -224,7 +224,7 @@ export default {
   data () {
     return {
       langDirection: '',
-      helpLink: 'https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki/Help',
+      helpLink: 'https://github.com/YoQuieroAyudar/fundraising-API-web-app/wiki/Help',
       lang: 'en'
     }
   },
@@ -304,7 +304,7 @@ export default {
       return 'rtl'
     },
     setHelpUrl (lang) {
-      var url = 'https://github.com/YoQuieroAyudar/fundraising-API-user-widget/wiki/'
+      var url = 'https://github.com/YoQuieroAyudar/fundraising-API-web-app/wiki/'
       if (lang === 'ar') {
         return url + 'مساعدة'
       } else if (lang === 'fr') {
