@@ -9,7 +9,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -31,7 +31,11 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/manifest.json', to: 'manifest.json' },
-      { from: 'src/assets/logo.png', to: 'logo.png' },
+      { from: 'src/assets/launcher-icon.png', to: 'launcher-icon.png' },
+      { from: 'src/assets/launcher-icon-96.png', to: 'launcher-icon-96.png' },
+      { from: 'src/assets/launcher-icon-144.png', to: 'launcher-icon-144.png' },
+      { from: 'src/assets/launcher-icon-192.png', to: 'launcher-icon-192.png' },
+      { from: 'src/assets/launcher-icon-256.png', to: 'launcher-icon-256.png' },
     ]),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
