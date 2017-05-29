@@ -2,9 +2,11 @@
   <div class="signup-area-wrapper">
 
     <div class="modal-wrapper">
-      <vodal :show="showTerms" animation="rotate" @hide="showTerms = false">
-          <terms-modal :selected_country="signup.POS_country"></terms-modal>
-      </vodal>
+      <div class="modal-inner">
+        <vodal :show="showTerms" :width="250" :height="300" animation="rotate" @hide="showTerms = false">
+            <terms-modal :selected_country="signup.POS_country"></terms-modal>
+        </vodal>
+      </div>
     </div>
 
     <h1>{{$t('Sign up')}}</h1>
@@ -151,7 +153,14 @@ a {
   margin-top: .2em;
 }
 .modal-wrapper {
+  position: relative;
   z-index: 1001;
+}
+.modal-inner {
+  /* position: absolute;
+  left: 10%;
+  top: 80%;
+  transform: translate(-50%,-50%); */
 }
 </style>
 
