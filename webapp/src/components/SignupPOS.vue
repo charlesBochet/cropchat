@@ -1,9 +1,9 @@
 <template>
   <div class="signup-area-wrapper">
-<!--
-    <vodal :show="readTerms" animation="rotate" @hide="readTerms = true">
-        <terms-modal></terms-modal>
-    </vodal> -->
+
+    <vodal :show="showTerms" animation="rotate" @hide="showTerms = false">
+        <terms-modal :selected_country="signup.POS_country"></terms-modal>
+    </vodal>
 
     <h1>{{$t('Sign up')}}</h1>
 
@@ -99,13 +99,13 @@
       </div>
 
       <div dir="ltr" class="input-group">
-        <span class="input-group-addon" title="Password" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
+        <span class="input-group-addon" title="Password" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" @click="toggleTermsModal" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
         <label class="form-control" for="accept_terms"  aria-describedby="terms-addon1">{{$t('Terms and conditions')}}</label>
       </div>
 
       {{$t('If you already have an account')}} <a class="" @click="goToLoginPOSPage" > {{$t('Login here')}}</a>
 
-      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
+      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" disabled="acceptTerms" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
 
       <button class="btn btn-default btn-xs btn-block" @click="goToSignupPage">{{$t('Signup as User')}}</button>
 
@@ -177,13 +177,18 @@ export default {
         password: ''
       },
       readTerms: false,
-      acceptTerms: false
+      acceptTerms: false,
+      showTerms: false
     }
   },
   computed: {
 
   },
   methods: {
+    toggleTermsModal (e) {
+      e.preventDefault()
+      this.showTerms = !this.showTerms
+    },
     goToSignupPage (e) {
       e.preventDefault()
       this.$store.commit('setCurrentPage', 'signup')
