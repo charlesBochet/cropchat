@@ -103,17 +103,17 @@
       </div>
 
       <div dir="ltr" class="input-group">
-        <span class="input-group-addon" title="Password" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" @click="toggleTermsModal" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
+        <span class="input-group-addon" :title="$t('Terms and conditions')" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" @click="toggleTermsModal" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
         <label class="form-control" for="accept_terms"  aria-describedby="terms-addon1">{{$t('Terms and conditions')}}</label>
       </div>
 
       {{$t('If you already have an account')}} <a class="" @click="goToLoginPOSPage" > {{$t('Login here')}}</a>
 
-      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" disabled="acceptTerms" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
-
-      <button class="btn btn-default btn-xs btn-block" @click="goToSignupPage">{{$t('Signup as User')}}</button>
+      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" :disabled="!acceptTerms" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
 
     </form>
+
+    <button class="btn btn-default btn-xs btn-block" @click="goToSignupPage">{{$t('Signup as User')}}</button>
 
   </div>
 </template>

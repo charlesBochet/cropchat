@@ -1,5 +1,14 @@
 <template>
   <div class="signup-area-wrapper">
+
+    <div class="modal-wrapper">
+      <div class="modal-inner">
+        <vodal :show="showTerms" :width="250" :height="300" animation="rotate" @hide="showTerms = false">
+            <terms-modal :selected_country="signup.POS_country"></terms-modal>
+        </vodal>
+      </div>
+    </div>
+
     <h1>{{$t('Sign up')}}</h1>
 
     <form class="form">
@@ -53,9 +62,14 @@
         <input name="password" class="form-control" v-model="signup.password"  @input="updatePassword" aria-describedby="password-addon1" type="password" :placeholder="$t('Password')" :value="signup.password" />
       </div>
 
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Terms and conditions')" id="terms-addon1"> <input name="accept_terms" v-model="acceptTerms" @click="toggleTermsModal" :checked="acceptTerms" type="checkbox" :value="acceptTerms" /> </span>
+        <label class="form-control" for="accept_terms"  aria-describedby="terms-addon1">{{$t('Terms and conditions')}}</label>
+      </div>
+
       {{$t('If you already have an account')}} <a class="" @click="goToLoginPage" > {{$t('Login here')}}</a>
 
-      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
+      <button class="btn btn-primary btn-block signup-btn" @click="signupUser" :disabled="!acceptTerms" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{$t('Sign up')}}</button>
 
     </form>
 
@@ -98,10 +112,15 @@ a {
 .btn-xs {
   margin-top: .2em;
 }
+.modal-wrapper {
+  position: relative;
+  z-index: 1001;
+}
 </style>
 
 <script>
 import * as urls from '../api_variables'
+import Terms from './Terms.vue'
 
 export default {
 
@@ -117,13 +136,20 @@ export default {
         country_of_residence: 'ES',
         mail: '',
         password: ''
-      }
+      },
+      readTerms: false,
+      acceptTerms: false,
+      showTerms: false
     }
   },
   computed: {
 
   },
   methods: {
+    toggleTermsModal (e) {
+      e.preventDefault()
+      this.showTerms = !this.showTerms
+    },
     goToSignupPOSPage (e) {
       e.preventDefault()
       this.$store.commit('setCurrentPage', 'signupPOS')
@@ -213,7 +239,7 @@ export default {
     }
   },
   components: {
-
+    'terms-modal': Terms
   }
 
 }
