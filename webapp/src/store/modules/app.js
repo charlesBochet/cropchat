@@ -11,10 +11,14 @@ const state = {
   api_url: 'http://localhost:8080',
   testMode: false,
   // version number click counter
-  VNCC: 0
+  VNCC: 0,
+  loginAsUser: true
 }
 
 const getters = {
+  getLoginAsUser (state) {
+    return state.loginAsUser
+  },
   getAppMode (state) {
     return state.testMode ? 'test' : 'normal'
   },
@@ -39,6 +43,9 @@ const getters = {
 }
 
 const mutations = {
+  setLoginAsUser (state, context) {
+    state.loginAsUser = Boolean(context)
+  },
   incrementVNCC (state) {
     state.VNCC += 1
     if (state.VNCC === 5) {
@@ -63,10 +70,12 @@ const mutations = {
   },
   setCurrentState (state, newState) {
     console.log('setting current_state')
+    console.log(newState)
     state.CurrentState = newState
   },
   setCurrentPage (state, newPage) {
     state.PageHistory.push(newPage)
+    console.log(newPage)
     state.CurrentPage = newPage
   },
   setLoading (state, newValue) {

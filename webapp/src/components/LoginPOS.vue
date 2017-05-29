@@ -1,38 +1,30 @@
 <template>
   <div class="login-area-wrapper">
-    <h1>{{$t('Login')}} <span v-if="$store.getters.getLoginAsUser">{{$t('as user')}}</span><span v-else>{{$t('as Establishment')}}</span></h1>
-    <div class="user-login" v-if="$store.getters.getLoginAsUser">
       <form class="form">
-        <div dir="ltr" class="input-group">
-          <span class="input-group-addon" :title="$t('Country')" id="country-addon1"> {{$t('Donation Destination')}}</span>
-          <select class="form-control" aria-describedby="nationality-addon1" @change="updateAPI" v-model="country">
-            <option v-for="(ctry, i) in $store.getters.getTopCountries" :selected="true" :value="ctry">{{ctry.name}}</option>
-          </select>
-        </div>
-        <div dir="ltr" class="input-group" :title="$t('Email')">
-          <span class="input-group-addon" id="email-addon1"> <i class="fa fa-envelope fa-fw" aria-hidden="true"></i> </span>
-          <input name="mail" class="form-control" v-model="login.mail" @input="updateEmail" aria-describedby="email-addon1" type="email" :placeholder="$t('Email')" :value="login.email" />
-        </div>
+      <div dir="ltr" class="input-group">
+        <span class="input-group-addon" :title="$t('Country')" id="country-addon1"> {{$t('Donation Destination')}}</span>
+        <select class="form-control" aria-describedby="nationality-addon1" @change="updateAPI" v-model="country">
+          <option v-for="(ctry, i) in $store.getters.getTopCountries" :selected="true" :value="ctry">{{ctry.name}}</option>
+        </select>
+      </div>
+      <div dir="ltr" class="input-group" :title="$t('Email')">
+        <span class="input-group-addon" id="email-addon1"> <i class="fa fa-envelope fa-fw" aria-hidden="true"></i> </span>
+        <input name="mail" class="form-control" v-model="login.mail" @input="updateEmail" aria-describedby="email-addon1" type="email" :placeholder="$t('Email')" :value="login.email" />
+      </div>
 
-        <div dir="ltr" class="input-group" :title="$t('Password')">
-          <span class="input-group-addon" id="password-addon1"> <i class="fa fa-lock fa-fw" aria-hidden="true"></i> </span>
-          <input name="password" class="form-control" v-model="login.password"  @input="updatePassword" aria-describedby="password-addon1" type="password" :placeholder="$t('Password')" :value="login.password" />
-        </div>
+      <div dir="ltr" class="input-group" :title="$t('Password')">
+        <span class="input-group-addon" id="password-addon1"> <i class="fa fa-lock fa-fw" aria-hidden="true"></i> </span>
+        <input name="password" class="form-control" v-model="login.password"  @input="updatePassword" aria-describedby="password-addon1" type="password" :placeholder="$t('Password')" :value="login.password" />
+      </div>
 
-        {{ $t("If you don't have an account yet") }} <a class="" @click="goToSignupPage" > {{ $t('Sign up here') }}</a>
+      {{ $t("If you don't have an account yet") }} <a class="" @click="goToSignupPage" > {{ $t('Sign up here') }}</a>
 
-        <button class="btn btn-primary btn-block login-btn" @click="loginUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t('Login') }}</button>
-        {{ $t('Remember me') }} <input name="remember_me" v-model="rememberMe" @click="setRememberMe" :checked="rememberMe" aria-describedby="password-addon1" type="checkbox" :value="rememberMe" />
-      </form>
+      <button class="btn btn-primary btn-block login-btn" @click="loginUser" > <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t('Login') }}</button>
+      {{ $t('Remember me') }} <input name="remember_me" v-model="rememberMe" @click="setRememberMe" :checked="rememberMe" aria-describedby="password-addon1" type="checkbox" :value="rememberMe" />
+    </form>
 
-      <video-frame></video-frame>
-
-    </div>
-
-    <div class="POS-login" v-else>
-      <login-pos-form></login-pos-form>
-    </div>
-    <button class="btn btn-default btn-xs btn-block" @click="gotToLoginPOS">{{$t('Login as Establishment')}}</button>
+    <video-frame></video-frame>
+    
   </div>
 </template>
 
@@ -79,7 +71,6 @@ a {
 <script>
 import FBLogin from './FBLogin.vue'
 import VideoFrame from './Vids.vue'
-import LoginPOS from './LoginPOS.vue'
 
 import * as urls from '../api_variables'
 
@@ -93,19 +84,17 @@ export default {
       },
       rememberMe: localStorage.getItem('rememberMe'),
       facebookLogin: false,
-      country: {name: 'Spain', db: 'mhs', code: 'ES'},
-      asUser: true
+      country: {name: 'Spain', db: 'mhs', code: 'ES'}
     }
   },
   computed: {
 
   },
   methods: {
-    gotToLoginPOS () {
-      // this.$store.commit('resetMessages')
-      this.$store.commit('setLoginAsUser', !this.asUser)
-      // this.$store.commit('setCurrentState', 'login')
-      this.asUser = !this.asUser
+    goToLoginPOSPage (e) {
+      e.preventDefault()
+      this.$store.commit('setCurrentPage', 'loginPOS')
+      this.$store.commit('resetMessages')
     },
     setRememberMe () {
       localStorage.setItem('rememberMe', this.rememberMe)
@@ -194,7 +183,6 @@ export default {
     }
   },
   components: {
-    'login-pos-form': LoginPOS,
     'fb-login': FBLogin,
     'video-frame': VideoFrame
   }

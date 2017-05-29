@@ -210,7 +210,7 @@ export default {
     },
     goToLoginPOSPage (e) {
       e.preventDefault()
-      this.$store.commit('setCurrentPage', 'login')
+      this.$store.commit('setCurrentPage', 'loginPOS')
       this.$store.commit('resetMessages')
     },
     updateNationality (e) {
