@@ -1,9 +1,11 @@
 <template>
   <div class="signup-area-wrapper">
 
-    <vodal :show="showTerms" animation="rotate" @hide="showTerms = false">
-        <terms-modal :selected_country="signup.POS_country"></terms-modal>
-    </vodal>
+    <div class="modal-wrapper">
+      <vodal :show="showTerms" animation="rotate" @hide="showTerms = false">
+          <terms-modal :selected_country="signup.POS_country"></terms-modal>
+      </vodal>
+    </div>
 
     <h1>{{$t('Sign up')}}</h1>
 
@@ -147,6 +149,9 @@ a {
 }
 .btn-xs {
   margin-top: .2em;
+}
+.modal-wrapper {
+  z-index: 1001;
 }
 </style>
 
