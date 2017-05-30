@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import firebase from '../service/firebase'
+// import firebase from '../service/firebase'
 
 export default {
   mounted () {
-    firebase.database.ref('cat/' + this.$route.params.id).once('value').then(snapshot => {
-      this.cat = snapshot.val()
-    })
+    // firebase.database.ref('cat/' + this.$route.params.id).once('value').then(snapshot => {
+    //   this.cat = snapshot.val()
+    // })
   },
   data () {
     return {

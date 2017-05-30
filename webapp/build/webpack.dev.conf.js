@@ -23,7 +23,11 @@ module.exports = merge(baseWebpackConfig, {
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/manifest.json', to: 'manifest.json' },
-      { from: 'src/assets/logo.png', to: 'logo.png' },
+      { from: 'src/assets/launcher-icon.png', to: 'launcher-icon.png' },
+      { from: 'src/assets/launcher-icon-96.png', to: 'launcher-icon-96.png' },
+      { from: 'src/assets/launcher-icon-144.png', to: 'launcher-icon-144.png' },
+      { from: 'src/assets/launcher-icon-192.png', to: 'launcher-icon-192.png' },
+      { from: 'src/assets/launcher-icon-256.png', to: 'launcher-icon-256.png' },
     ]),
     new webpack.DefinePlugin({
       'process.env': config.dev.env
