@@ -71,7 +71,11 @@ const localizations = {
   'GB': '',
   'US': '',
   'Help': 'Aide',
-  'Terms and conditions': 'Termes et conditions'
+  'Terms and conditions': 'Termes et conditions',
+  'Login as Establishment': '',
+  'Login as User': '',
+  'Signup as Establishment': '',
+  'Signup as User': ''
 }
 
 export default localizations
