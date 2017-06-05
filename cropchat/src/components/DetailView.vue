@@ -1,16 +1,16 @@
 <template>
   <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--8-col">
+    <div class="mdl-cell mdl-cell--8-col" v-if="this.cat">
       <div class="picture">
-        <img :src="this.pictures[$route.params.id].url" />
+        <img :src="this.cat.url" />
       </div>
       <div class="info">
-        <span>{{ this.pictures[$route.params.id].info }}</span>
+        <span>{{ this.cat.info }}</span>
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
       <div class="comment">
-        <span>{{ this.pictures[$route.params.id].comment }}</span>
+        <span>{{ this.cat.comment }}</span>
       </div>
       <div class="actions">
         <router-link class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" to="/post">
@@ -21,10 +21,18 @@
   </div>
 </template>
 <script>
+  import _ from 'lodash'
   export default {
+    data: {
+      cat: null
+    },
+    mounted () {
+      this.cat = _.find(this.$root.cats, (cat) => cat['.key'] === this.$route.params.id)
+      console.log(this.cat)
+    }
   }
 </script>
-<style scoped>
+<style scoped
   .picture > img {
     color: #fff;
     width:100%;

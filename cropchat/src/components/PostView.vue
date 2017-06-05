@@ -51,7 +51,7 @@
           }
         ).then(
           response => {
-            this.$root.$firebaseRefs.cat.push(
+            this.$root.$firebaseRefs.cats.push(
               {
                 'url': response.body.secure_url,
                 'comment': this.title,

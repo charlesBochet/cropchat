@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   firebase: {
-    cat: firebase.database.ref('cat')
+    cats: firebase.database.ref('cat')
   },
   router,
   template: '<App/>',
