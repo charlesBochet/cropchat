@@ -41,15 +41,30 @@
     },
     methods: {
       postCat () {
-        this.$root.$firebaseRefs.cat.push(
+        this.$http.post(
+          'https://api.cloudinary.com/v1_1/dfaypbt40/image/upload',
           {
-            'url': this.catUrl,
-            'comment': this.title,
-            'info': 'Posted by Charles on Tuesday',
-            'created_at': -1 * new Date().getTime()
+            file: this.catUrl,
+            timestamp: new Date().getTime(),
+            api_key: '153638847867413',
+            upload_preset: 'ne9fa7sc'
           }
         ).then(
-          this.$router.push('/')
+          response => {
+            this.$root.$firebaseRefs.cats.push(
+              {
+                'url': response.body.secure_url,
+                'comment': this.title,
+                'info': 'Posted by Charles on Tuesday',
+                'created_at': -1 * new Date().getTime()
+              }
+            ).then(
+              this.$router.push('/')
+            )
+          },
+          error => {
+            console.log(error)
+          }
         )
       }
     }
