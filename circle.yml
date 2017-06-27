@@ -1,0 +1,12 @@
+general:
+  branches:
+    ignore:
+      - heroku
+machine:
+  node:
+    version: 6.10
+deployment:
+  heroku:
+    branch: master
+    commands:
+      - ./heroku.sh
