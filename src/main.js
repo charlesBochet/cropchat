@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   firebase: {
-    cat: firebase.database.ref('cat')
+    cat: firebase.database.ref('cat').orderByChild('created_at')
   },
   router,
   template: '<App/>',
