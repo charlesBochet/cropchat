@@ -3,7 +3,7 @@ npm run build
 echo 'Project built'
 
 echo 'Compressing project files...'
-tar -zcvf cropchat.tar.gz * > /dev/null 2>&1
+tar -zcvf cropchat.tar.gz dist > /dev/null 2>&1
 echo 'Files compressed'
 
 echo 'Copying project to staging server...'

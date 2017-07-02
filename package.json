@@ -1,7 +1,7 @@
 {
   "name": "cropchat",
   "version": "1.0.0",
-  "description": "A cat messenging application",
+  "description": "A cat messaging application",
   "author": "Charles BOCHET <charlesb@theodo.fr>, Kévin JEAN <kevinj@theodo.fr>",
   "private": true,
   "scripts": {
