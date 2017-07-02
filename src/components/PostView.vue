@@ -35,7 +35,7 @@
       }
     },
     mounted () {
-      this.$http.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=1').then(response => {
+      this.$http.get('https://thecatapi.com/api/images/get?format=xml&results_per_page=1').then(response => {
         this.catUrl = parse(response.body).root.children['0'].children['0'].children['0'].children['0'].content
       })
     },
