@@ -108,7 +108,11 @@ var webpackConfig = merge(baseWebpackConfig, {
       stripPrefix: 'dist/',
       runtimeCaching: [
         {
-          urlPattern: /^http:\/\/(\d+)\.media\.tumblr\.com\//,
+          urlPattern: /^https:\/\/thecatapi\.com\/api\/images\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/(\d+)\.media\.tumblr\.com\//,
           handler: 'cacheFirst'
         },
         {
