@@ -14,13 +14,27 @@
       </div>
     </div>
     <router-link class="add-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" to="/post">
-      <i class="material-icons">add</i>
+      <i class="material-icons">photo</i>
     </router-link>
+    <span class="take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" @click="showModal = true">
+      <i class="material-icons">camera_alt</i>
+    </span>
+      <CameraModal @close="showModal = false" showModal="showModal" v-if="showModal"/>
+    </transition>
   </div>
 </template>
 <script>
   import { reduce } from 'lodash'
+  import CameraModal from './CameraModal.vue'
   export default {
+    components: {
+      'CameraModal': CameraModal
+    },
+    data () {
+      return {
+        showModal: false
+      }
+    },
     methods: {
       displayDetails (id) {
         this.$router.push({name: 'detail', params: { id: id }})
@@ -61,7 +75,13 @@
     position: fixed;
     right: 24px;
     bottom: 24px;
-    z-index: 998;
+    z-index: 5;
+  }
+  .take-picture-button {
+    position: fixed;
+    right: 24px;
+    bottom: 104px;
+    z-index: 5;
   }
   .image-card {
     position: relative;
