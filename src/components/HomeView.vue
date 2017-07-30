@@ -16,20 +16,14 @@
     <router-link class="add-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" to="/post">
       <i class="material-icons">photo</i>
     </router-link>
-    <span class="take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" @click="showModal = true">
+    <router-link class="take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" to="/camera">
       <i class="material-icons">camera_alt</i>
-    </span>
-      <CameraModal @close="showModal = false" showModal="showModal" v-if="showModal"/>
-    </transition>
+    </router-link>
   </div>
 </template>
 <script>
   import { reduce } from 'lodash'
-  import CameraModal from './CameraModal.vue'
   export default {
-    components: {
-      'CameraModal': CameraModal
-    },
     data () {
       return {
         showModal: false
@@ -73,14 +67,14 @@
 <style scoped>
   .add-picture-button {
     position: fixed;
-    right: 24px;
-    bottom: 24px;
+    right: 12px;
+    bottom: 12px;
     z-index: 5;
   }
   .take-picture-button {
     position: fixed;
-    right: 24px;
-    bottom: 104px;
+    right: 12px;
+    bottom: 82px;
     z-index: 5;
   }
   .image-card {

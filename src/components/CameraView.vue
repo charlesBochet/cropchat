@@ -1,5 +1,5 @@
 <template>
-    <transition name="modal">
+    <transition name="fade">
         <div class="camera-modal">
             <video ref="video" class="camera-stream"/>
             <div class="camera-modal-container">
@@ -45,13 +45,13 @@
     .camera-stream {
         width: 100%;
     }
-    .modal-enter-active, .modal-leave-active {
+    .fade-enter-active, .fade-leave-active {
         transition: all .3s ease;
     }
-    .modal-enter {
+    .fade-enter {
         transform: translate(0, 100%);
     }
-    .modal-leave-to {
+    .fade-leave-to {
         transform: translate(0, 100%);
     }
 </style>

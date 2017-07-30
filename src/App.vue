@@ -14,7 +14,9 @@
     </div>
     <main class="mdl-layout__content">
       <div class="page-content">
-        <router-view></router-view>
+        <transition name="fade">
+          <router-view></router-view>
+        </transition>
       </div>
     </main>
   </div>
@@ -36,4 +38,14 @@ export default {
 <style>
   @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
   @import url('https://code.getmdl.io/1.2.1/material.blue-red.min.css');
+
+  .fade-enter-active, .fade-leave-active {
+    transition: all .3s ease;
+  }
+  .fade-enter, .fade-leave {
+    opacity: 0;
+  }
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>
