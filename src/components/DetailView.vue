@@ -32,7 +32,7 @@
       if (navigator.onLine) {
         this.cat = find(this.$root.cat, (cat) => cat['.key'] === this.$route.params.id)
       } else {
-        this.cat = JSON.parse(localStorage.getItem('cats'))[this.$route.params.id]
+        this.cat = find(localStorage.getItem('cats'), (cat) => cat['.key'] === this.$route.params.id)
       }
     }
   }

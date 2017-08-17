@@ -3,7 +3,7 @@
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--3-col mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
-        <div v-for="(cat, id) in getCats()" class="image-card" @click.prevent="displayDetails(id)">
+        <div v-for="cat in getCats()" class="image-card" @click.prevent="displayDetails(cat['.key'])">
           <div class="image-card__picture">
             <img :src="cat.url" />
           </div>
@@ -19,7 +19,6 @@
   </div>
 </template>
 <script>
-  import { reduce } from 'lodash'
   export default {
     methods: {
       displayDetails (id) {
@@ -28,24 +27,18 @@
       getCats () {
         if (navigator.onLine) {
           this.saveCatsToCache()
-          return reduce(this.$root.cat, (cats, firebaseEntry) => {
-            cats[firebaseEntry['.key']] = {
-              url: firebaseEntry['url'],
-              comment: firebaseEntry['comment'],
-              info: firebaseEntry['info'],
-              created_at: firebaseEntry['created_at']
-            }
-            return cats
-          }, {})
+          return this.$root.cat
         } else {
           return JSON.parse(localStorage.getItem('cats'))
         }
       },
       saveCatsToCache () {
         this.$root.$firebaseRefs.cat.orderByChild('created_at').once('value', (snapchot) => {
-          let cachedCats = {}
+          let cachedCats = []
           snapchot.forEach((catSnapchot) => {
-            cachedCats[catSnapchot.key] = catSnapchot.val()
+            let cachedCat = catSnapchot.val()
+            cachedCat['.key'] = catSnapchot.key
+            cachedCats.push(cachedCat)
           })
           localStorage.setItem('cats', JSON.stringify(cachedCats))
         })
