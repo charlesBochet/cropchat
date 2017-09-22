@@ -3,7 +3,7 @@
         <div class="camera-modal">
             <video ref="video" class="camera-stream"/>
             <div class="camera-modal-container">
-                <span @click="$emit('close')" class="take-picture-button take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <span @click="capture" class="take-picture-button take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                   <i class="material-icons">camera</i>
                 </span>
             </div>
@@ -12,13 +12,30 @@
 </template>
 <script>
   export default {
+    data () {
+      return {
+        mediaStream: null
+      }
+    },
     mounted () {
       navigator.mediaDevices.getUserMedia({ video: true })
         .then((mediaStream) => {
+          this.mediaStream = mediaStream
           this.$refs.video.srcObject = mediaStream
           this.$refs.video.play()
         })
         .catch(error => console.error('getUserMedia() error:', error))
+    },
+    methods: {
+      capture () {
+        const mediaStreamTrack = this.mediaStream.getVideoTracks()[0]
+        const imageCapture = new window.ImageCapture(mediaStreamTrack)
+
+        return imageCapture.takePhoto().then(blob => {
+          console.log(blob)
+          this.$router.push('/')
+        })
+      }
     }
   }
 </script>
