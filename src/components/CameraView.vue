@@ -27,6 +27,10 @@
         })
         .catch(error => console.error('getUserMedia() error:', error))
     },
+    destroyed () {
+      const tracks = this.mediaStream.getTracks()
+      tracks.map(track => track.stop())
+    },
     methods: {
       capture () {
         const mediaStreamTrack = this.mediaStream.getVideoTracks()[0]
@@ -63,14 +67,5 @@
     }
     .camera-stream {
         width: 100%;
-    }
-    .fade-enter-active, .fade-leave-active {
-        transition: all .3s ease;
-    }
-    .fade-enter {
-        transform: translate(0, 100%);
-    }
-    .fade-leave-to {
-        transform: translate(0, 100%);
     }
 </style>
