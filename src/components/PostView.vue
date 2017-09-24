@@ -1,11 +1,9 @@
 <template>
   <form>
     <div class="mdl-grid">
-      <div >
-        <transition-group name="modal">
-          <img key="1" v-show="catUrl === null" :src="fallbackImage"/>
-          <img key="2" v-show="catUrl !== null" :src="this.catUrl"/>
-        </transition-group>
+      <div class="mdl-cell image-container">
+        <div v-show="isImageLoading" class="mdl-spinner mdl-js-spinner is-active"></div>
+        <img v-if="!isImageLoading" class="cat-image" v-show="catUrl !== null" :src="this.catUrl"/>
       </div>
       <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty">
