@@ -12,7 +12,11 @@
 </template>
 
 <script>
+  import postCat from '../mixins/postCat'
+  import { storage } from '../services/firebase'
+
   export default {
+    mixins: [postCat],
     data () {
       return {
         mediaStream: null
@@ -37,8 +41,8 @@
         const imageCapture = new window.ImageCapture(mediaStreamTrack)
 
         return imageCapture.takePhoto().then(blob => {
-          console.log(blob)
-          this.$router.push('/')
+          storage.ref().child(`images/picture-${new Date().getTime()}`).put(blob)
+          this.$router.go(-1)
         })
       }
     }

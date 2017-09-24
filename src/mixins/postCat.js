@@ -9,7 +9,7 @@ const postCat = {
           'created_at': -1 * new Date().getTime()
         }
       ).then(
-        this.$router.push('/')
+        this.$router.go(-1)
       )
     }
   }
