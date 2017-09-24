@@ -21,8 +21,10 @@
     </router-link>
   </div>
 </template>
+
 <script>
   import { reduce } from 'lodash'
+
   export default {
     data () {
       return {
@@ -64,16 +66,17 @@
     }
   }
 </script>
+
 <style scoped>
   .add-picture-button {
     position: fixed;
-    right: 12px;
+    right: 20px;
     bottom: 12px;
     z-index: 5;
   }
   .take-picture-button {
     position: fixed;
-    right: 12px;
+    right: 20px;
     bottom: 82px;
     z-index: 5;
   }

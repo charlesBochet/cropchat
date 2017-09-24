@@ -20,8 +20,10 @@
     </div>
   </div>
 </template>
+
 <script>
   import { find } from 'lodash'
+
   export default {
     data () {
       return {
@@ -37,6 +39,7 @@
     }
   }
 </script>
+
 <style scoped>
   .picture > img {
     color: #fff;

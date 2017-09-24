@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-var config = {
+const config = {
   apiKey: 'AIzaSyCqM9bPtHmERf7Zcf2kL-ktaJZu8711Rng',
   authDomain: 'cropchat-50ff7.firebaseapp.com',
   databaseURL: 'https://cropchat-50ff7.firebaseio.com',

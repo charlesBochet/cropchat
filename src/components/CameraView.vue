@@ -10,6 +10,7 @@
         </div>
     </transition>
 </template>
+
 <script>
   export default {
     data () {
@@ -39,6 +40,7 @@
     }
   }
 </script>
+
 <style scoped>
     .camera-modal {
         width: 100%;

@@ -13,7 +13,7 @@
           <label for="username" class="mdl-textfield__label">Describe me</label>
         </div>
         <div class="actions">
-          <a @click.prevent="postCat" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          <a @click.prevent="postCat(catUrl, title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
             POST A CAT
           </a>
         </div>
@@ -21,10 +21,14 @@
     </div>
   </form>
 </template>
+
 <script>
   import parse from 'xml-parser'
   import fallbackImage from '../assets/main.gif'
+  import postCat from '../mixins/postCat'
+
   export default {
+    mixins: [postCat],
     data () {
       return {
         'fallbackImage': fallbackImage,
@@ -39,23 +43,10 @@
         img.onload = () => { this.catUrl = catUrl }
         img.src = catUrl
       })
-    },
-    methods: {
-      postCat () {
-        this.$root.$firebaseRefs.cat.push(
-          {
-            'url': this.catUrl,
-            'comment': this.title,
-            'info': 'Posted by Charles on Tuesday',
-            'created_at': -1 * new Date().getTime()
-          }
-        ).then(
-          this.$router.push('/')
-        )
-      }
     }
   }
 </script>
+
 <style scoped>
   img {
     position: absolute;
