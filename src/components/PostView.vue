@@ -22,14 +22,12 @@
 
 <script>
   import parse from 'xml-parser'
-  import fallbackImage from '../assets/main.gif'
   import postCat from '../mixins/postCat'
 
   export default {
     mixins: [postCat],
     data () {
       return {
-        'fallbackImage': fallbackImage,
         'catUrl': null,
         'title': ''
       }

@@ -42,7 +42,10 @@
 
         return imageCapture.takePhoto().then(blob => {
           storage.ref().child(`images/picture-${new Date().getTime()}`).put(blob)
-          this.$router.go(-1)
+          .then(res => {
+            this.postCat(res.metadata.downloadURLs[0], 'Hello')
+            this.$router.go(-1)
+          })
         })
       }
     }
@@ -71,5 +74,6 @@
     }
     .camera-stream {
         width: 100%;
+        max-height: 100%;
     }
 </style>
