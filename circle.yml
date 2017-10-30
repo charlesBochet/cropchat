@@ -1,0 +1,13 @@
+machine:
+ node:
+   version: 6.10
+
+test:
+ override:
+   - echo "No tests yet :/"
+
+deployment:
+ staging:
+   branch: master
+   commands:
+     - ./devops/deploy.sh
