@@ -38,7 +38,7 @@
       postCat () {
         this.$root.$firebaseRefs.cat.push(
           {
-            'url': this.catUrl,
+            'url': this.catUrl.replace(/^http:\/\//i, 'https://'),
             'comment': this.title,
             'info': 'Posted by Charles on Tuesday',
             'created_at': -1 * new Date().getTime()
