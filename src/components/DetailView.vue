@@ -2,15 +2,15 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--8-col">
       <div class="picture">
-        <img :src="this.pictures[$route.params.id].url" />
+        <img :src="cat.url" />
       </div>
       <div class="info">
-        <span>{{ this.pictures[$route.params.id].info }}</span>
+        <span>{{ cat.info }}</span>
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
       <div class="comment">
-        <span>{{ this.pictures[$route.params.id].comment }}</span>
+        <span>{{ cat.comment }}</span>
       </div>
       <div class="actions">
         <router-link class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" to="/post">
@@ -21,12 +21,15 @@
   </div>
 </template>
 <script>
-  import data from '../data'
+  import { find } from 'lodash'
   export default {
     data () {
       return {
-        'pictures': data.pictures
+        cat: null
       }
+    },
+    mounted () {
+      this.cat = find(this.$root.cat, (cat) => cat['.key'] === this.$route.params.id)
     }
   }
 </script>
