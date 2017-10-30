@@ -6,9 +6,14 @@ import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
 import firebase from '@/services/firebase'
+import VueAnalytics from 'vue-analytics'
 
 Vue.use(Vuefire)
 Vue.use(VueResource)
+Vue.use(VueAnalytics, {
+  id: 'UA-101944993-1',
+  router
+})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
