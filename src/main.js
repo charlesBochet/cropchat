@@ -7,8 +7,6 @@ import App from './App'
 import router from './router'
 import { database } from '@/services/firebase'
 import VueAnalytics from 'vue-analytics'
-import firebase from './services/firebase'
-
 
 Vue.use(Vuefire)
 Vue.use(VueResource)
