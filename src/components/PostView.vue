@@ -29,7 +29,7 @@
     data () {
       return {
         'catUrl': null,
-        'title' : null
+        'title': null
       }
     },
     mounted () {
