@@ -28,7 +28,8 @@
     mixins: [postCat],
     data () {
       return {
-        'catUrl': null
+        'catUrl': null,
+        'title': null
       }
     },
     mounted () {
